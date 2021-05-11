@@ -1,0 +1,307 @@
+version: "3.3"
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.4
+    container_name: elasticsearch
+    environment:
+      - "bootstrap.memory_lock=true"
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - "discovery.type=single-node" 
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+      - elasticsearch-config:/usr/share/elasticsearch/config/
+    ports:
+      - 9200:9200
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.2
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:6.5.4
+    container_name: logstash
+    environment:
+      - "LS_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "TZ=Europe/Istanbul"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - logstash-data:/usr/share/logstash/data
+      - logstash-config:/usr/share/logstash/config/
+      - logstash-pipeline:/usr/share/logstash/pipeline
+      - processed-data:/home/
+    ports:
+      - "9600:9600"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.4
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.5.4
+    container_name: kibana
+    environment:
+      SERVER_NAME: kibana
+      SERVER_HOST: 172.16.36.5
+      ELASTICSEARCH_URL: http://172.16.36.2:9200
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - kibana-config:/usr/share/kibana/config/
+    ports:
+      - "5601:5601"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.5
+
+  grafana:
+    image: grafana/grafana:7.0.3
+    container_name: grafana
+    environment:
+      - "GF_SERVER_ROOT_URL=http://172.16.36.6"
+      - "GF_SECURITY_ADMIN_PASSWORD=mypasswd"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - grafana-config:/var/lib/grafana
+      - grafana-setup:/etc/grafana
+      - grafana-location:/usr/share/grafana/public
+    ports:
+      - "3000:3000"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.6
+
+
+  apache:
+    image: 'bitnami/apache:latest'
+    container_name: apache
+    environment:
+      - "APACHE_HTTP_PORT_NUMBER=8181"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - webdocs:/app
+      - webconf:/bitnami/apache/conf
+    ports:
+      - "80:8181"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.8
+
+  apache2:
+    image: 'bitnami/apache:latest'
+    container_name: apache2
+    entrypoint: "true"
+    environment:
+      - "APACHE_HTTP_PORT_NUMBER=8181"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - webdocs2:/app
+      - webconf2:/bitnami/apache/conf
+    ports:
+      - "8080:8181"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.18
+
+  apache3:
+    image: 'bitnami/apache:latest'
+    container_name: apache3
+    entrypoint: "true"
+    environment:
+      - "APACHE_HTTP_PORT_NUMBER=8182"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - webdocs3:/app
+      - webconf3:/bitnami/apache/conf
+    ports:
+      - "8090:8182"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.19
+
+  apache4:
+    image: 'bitnami/apache:latest'
+    container_name: apache4
+    entrypoint: "true"
+    environment:
+      - "APACHE_HTTP_PORT_NUMBER=8182"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - webdocs4:/app
+      - webconf4:/bitnami/apache/conf
+    ports:
+      - "9090:8182"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.20
+
+
+  vsftp:
+    image: 'fauria/vsftpd'
+    container_name: vsftp
+    environment:
+      - "FTP_USER=medlab"
+      - "FTP_PASS=mypasswd"
+      - "PASV_ADDRESS=157.245.43.51"
+      - "PASV_MIN_PORT=11000"
+      - "PASV_MAX_PORT=11500"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - vsftp-data:/home/vsftpd
+      - vsftp-conf:/etc/vsftpd
+    ports:
+      - "21:21"
+      - "2121:21"
+      - "11000-11500:11000-11500"
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.9
+
+  transform:
+    image: transform:elk
+    container_name: transform
+    environment:
+      - "ExecPythonName=PreprocessMeasurements.py"
+      - "DELTA_TIME_IN_MIN=60"
+      - "RUN_INTERVAL_IN_MIN=5"
+      - "GES_NAME=SalihliUysalGES"
+      - "STRING_NUM=12"
+      - "ORIG_PATH=./ORIG/medlab/SalihliUysalGES/"
+      - "READY_PATH=./READY/medlab/SalihliUysalGES/"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - collector-src:/SRC
+      - vsftp-data:/ORIG
+      - processed-data:/READY
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.10
+
+  transformv2:
+    image: transform:elk
+    container_name: transformv2
+    environment:
+      - "ExecPythonName=PreprocessMeasurements.py"
+      - "DELTA_TIME_IN_MIN=60"
+      - "RUN_INTERVAL_IN_MIN=5"
+      - "GES_NAME=GaziantepHali"
+      - "STRING_NUM=20"
+      - "ORIG_PATH=./ORIG/medlab/GaziantepHali/"
+      - "READY_PATH=./READY/medlab/GaziantepHali/"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - collector-src:/SRC
+      - vsftp-data:/ORIG
+      - processed-data:/READY
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.11
+
+  transformv3:
+    image: transform:elk
+    container_name: transformv3
+    environment:
+      - "ExecPythonName=TransformMeasurementsv2-20string.py"
+      - "DELTA_TIME_IN_MIN=60"
+      - "RUN_INTERVAL_IN_MIN=15"
+      - "GES_NAME=GaziantepBadeIplik"
+      - "ORIG_PATH=./ORIG/medlab/GaziantepBadeIplik/"
+      - "READY_PATH=./READY/medlab/GaziantepBadeIplik/"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - collector-src:/SRC
+      - vsftp-data:/ORIG
+      - processed-data:/READY
+    networks:
+      br-elk:
+        ipv4_address: 172.16.36.12
+
+volumes:
+  elasticsearch-data:
+    driver: local
+  elasticsearch-config:
+    driver: local
+  elasticsearch2-config:
+    driver: local
+  elasticsearch3-config:
+    driver: local
+  elasticsearch2-data:
+    driver: local
+  elasticsearch3-data:
+    driver: local
+  logstash-config:
+    driver: local
+  logstash-data:
+    driver: local
+  logstash-pipeline:
+    driver: local
+  kibana-config:
+    driver: local
+  grafana-config:
+    driver: local
+  grafana-setup:
+    driver: local
+  grafana-location:
+    driver: local
+  webdocs:
+    driver: local
+  webconf:
+    driver: local
+  webdocs2:
+    driver: local
+  webconf2:
+    driver: local
+  webdocs3:
+    driver: local
+  webconf3:
+    driver: local
+  webdocs4:
+    driver: local
+  webconf4:
+    driver: local
+  vsftp-data:
+    driver: local
+  vsftp-conf:
+    driver: local
+  collector-src:
+    driver: local
+  processed-data:
+    driver: local
+networks:
+  br-elk:
+    external:
+      name: br-elk
+
