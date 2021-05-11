@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+<style type="text/css">
+table {
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #d4d4d4;
+}
+ 
+tr:nth-child(even) {
+  background: #d4d4d4;
+}
+ 
+th, td {
+  padding: 10px 30px;
+}
+ 
+th {
+  border-bottom: 1px solid #d4d4d4;
+}  
+tfoot {
+  font-weight: bold;	
+} 
+</style>
+<title>CSV</title>
+</head>
+<body>
+
+<script type="text/javascript" >
+var url = "meteo-monthly.csv";
+var panel_num = 8000;
+var cost_per_watt = 0.68;
+var usdtl = 5.70;
+
+function initSelectionForm() {
+	var text = "<select required>";
+	text += "<option value=\"\">Sehir Seciniz</option>";	
+	
+	var lines = readMyCSV(url);
+	for (var count = 1; count < lines.length; count++) {
+		var rowContent = lines[count].split(",");
+		text += "<option value=\""+rowContent[0]+"\">"+rowContent[1]+"</option>";
+	}	
+	
+	text += "</select>";
+	return text;
+}
+
+function calculateRadiation () {
+	var plate = document.getElementById("city-selection").elements[0].value;
+	
+	var lines = readMyCSV(url);
+	var radiation = findRadiation(lines, plate);
+	var myRadArr = createRadiationArray(radiation);
+	var myTable = createTable(myRadArr);
+	
+	document.getElementById("myTable").innerHTML = myTable;
+
+}
+
+function findRadiation(lines, plate) {
+	for (var count = 0; count < lines.length; count++) {
+		var rowContent = lines[count].split(",");
+		if (rowContent[0] == plate) {
+			return rowContent;
+		}
+	}
+}
+
+function readMyCSV(url) {
+	var request = new XMLHttpRequest();  
+	request.open("GET", url, false);   
+	request.send(null);  
+
+	var csvData = new Array();
+	var lines = request.responseText.split("\n");
+	
+	return lines;
+}
+
+function createRadiationArray(radiation) {
+	var panel_power = parseInt(document.getElementById("city-selection").elements[1].value)/1000;
+	
+	var months =  ["Ocak", "Subat", "Mart","Nisan","Mayis","Haziran","Temmuz","Agustos","Eylul","Ekim","Kasim","Aralik"];
+	var myRadArr = new Array(3); 
+	
+	for (var i = 0; i < months.length+1; i++) { 
+		myRadArr[i] = new Array(3); 
+	}
+	
+	myRadArr[0][0] = "Aylar";
+	myRadArr[0][1] = "Isinim";
+	myRadArr[0][2] = "Kazanc (USD)";
+	
+	for (var i = 0; i < months.length; i++) { 
+		myRadArr[i+1][0] = months[i]; 
+		myRadArr[i+1][1] = radiation[i+2];
+		myRadArr[i+1][2] = parseInt((panel_num*panel_power*radiation[i+2]*cost_per_watt)/usdtl);
+	} 
+	
+	return myRadArr;
+}
+
+function createTable (myRadArr) {
+	var table='<table>';
+	var sumRad = 0;
+	var sumGain = 0;
+	for (var count = 0; count < myRadArr.length; count++) {
+		if (count ==0) {
+			table += '<thead>';
+	      table += '<tr>';
+		} else {
+			table += '<tr>';
+		}
+	
+		for (var i = 0; i < 3; i++) {
+			if (count === 0) {
+	        table += '<th>';
+	        table += myRadArr[count][i];
+	        table += '</th>';
+	      } else {
+	        table += '<td>';
+	        table += myRadArr[count][i];
+	        table += '</td>';	        
+	      } 
+	
+		}
+		if (count === 0) {
+	      table += '</tr>';
+	      table += '</thead>';
+	      table += '<tbody>';
+	   } else {
+	      table += '</tr>';
+   		sumRad += parseFloat(myRadArr[count][1]);
+   		sumGain += parseFloat(myRadArr[count][2]);
+	   }
+	   
+	}
+
+	table += '</tbody>';
+	table += '<tfoot><tr><td>Toplam</td><td>'+sumRad.toFixed(1)+'</td><td>'+sumGain+'</td></tr></tfoot>';
+	table += '</table>';
+	
+	return table;
+}
+</script>
+
+<form id="city-selection">
+<div id="mySelectionForm"></div>
+<script> document.getElementById("mySelectionForm").innerHTML = initSelectionForm(); </script>
+
+<input type="number" class="form-control" id="r_weight" placeholder="Panel Gucu" value="300" required>
+
+
+</form>
+<button type="submit" onclick="calculateRadiation()" id="showPanel">Guncelle</button>
+
+<div id="myTable"></div>
+
+</body>
+</html>

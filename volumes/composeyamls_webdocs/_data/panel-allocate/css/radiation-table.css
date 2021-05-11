@@ -1,0 +1,22 @@
+table {
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  border: 1px solid #d4d4d4;
+  font-size: 12px;
+}
+ 
+tr:nth-child(even) {
+  background: #d4d4d4;
+}
+ 
+th, td {
+  padding: 4px 10px;
+}
+ 
+th {
+  border-bottom: 1px solid #d4d4d4;
+}  
+tfoot {
+  font-weight: bold;	
+} 

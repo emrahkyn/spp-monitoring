@@ -1,0 +1,44 @@
+       <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">YERLESIM PLANI</span>
+            <span class="badge badge-secondary badge-pill">3</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Panel sayisi</h6>
+                <small class="text-muted" id="h_str_num"></small>
+                <small class="text-muted" id="v_str_num"></small>                
+              </div>             
+              <span class="text-muted"><p id="total_panel_num"></p></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Max. Panel sayisi</h6>
+                <small class="text-muted" id="efficiency"></small>                               
+              </div>             
+              <span class="text-muted" id="max_panel_num"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Panel: izdusum/yukseklik</h6>
+                <small class="text-muted" id="shadow_dist"></small>                               
+              </div>             
+              <span class="text-muted" id="p_projection"></span>              
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Dikey bosluk</h6>                
+                <small class="text-muted" id="max_col_panel_num"></small>                                                      
+              </div>             
+              <span class="text-muted" id="h_str_free_space"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-condensed">
+              <div>
+                <h6 class="my-0">Golge mesafesi</h6>                
+                <small class="text-muted" id="max_row_panel_num"></small>                                        
+              </div>             
+              <span class="text-muted" id="v_str_free_space"></span>
+            </li>                        
+          </ul>
+        </div>

@@ -1,0 +1,5 @@
+AuthUserFile /opt/bitnami/apache/conf/.htpasswd
+AuthGroupFile /dev/null
+AuthName "Lutfen sifrenizi girini"
+AuthType Basic
+Require valid-user

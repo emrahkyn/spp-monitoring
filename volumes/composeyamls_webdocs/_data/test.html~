@@ -1,0 +1,17 @@
+<html>
+<head>
+<script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script>
+</head>
+
+
+<body>
+
+
+<a href="https://www.accuweather.com/tr/tr/kahramanmaras/318372/weather-forecast/318372" class="aw-widget-legal">
+<!--
+By accessing and/or using this code snippet, you agree to AccuWeather’s terms and conditions (in English) which can be found at https://www.accuweather.com/en/free-weather-widgets/terms and AccuWeather’s Privacy Statement (in English) which can be found at https://www.accuweather.com/en/privacy.
+-->
+</a><div id="awcc1530528934714" class="aw-widget-current"  data-locationkey="318372" data-unit="c" data-language="tr" data-useip="false" data-uid="awcc1530528934714"></div>
+</body>
+</html>
+ 

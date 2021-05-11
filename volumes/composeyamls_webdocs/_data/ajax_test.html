@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"
+        data-semver="2.0.3" data-require="jquery"></script>
+    <script>
+	  var ges_name = "";
+	  var inv_name = "#INV1"
+          function goToPage763(mySelect){
+	      //var base_url = "http://izleme.medlabyazilim.com:3000/d-solo/RknG-V_Mz/enerji-uretimi?orgId=1&from=1617954378340&to=1618040778340&panelId=2&var-ges_name=";
+	      var base_url = "http://172.16.36.6:3000/d-solo/XNrVqeGMk/enerji-uretimi?orgId=1&from=1618258762074&to=1618301962074&panelId=11";
+	      base_url = base_url + $(mySelect).val();
+              frames['iframe2'].location.href = base_url;
+
+	      //base_url = "http://izleme.medlabyazilim.com:3000/d-solo/RknG-V_Mz/enerji-uretimi?orgId=1&from=1617954378340&to=1618040778340&panelId=6&var-ges_name=";
+	      //base_url = base_url + $(mySelect).val();
+              frames['iframe3'].location.href = base_url;
+	      
+	      ges_name = $(mySelect).val();
+	      document.getElementById("demo").innerHTML = ges_name + inv_name;
+          }
+	  function setInverter(mySelect){
+	      inv_name = $(mySelect).val();
+	      document.getElementById("demo").innerHTML = ges_name + inv_name + "huhu";
+	  }
+    </script>
+</head>
+
+<body>
+<?php phpinfo(); ?> 
+    <form name="form763">
+        <select class="form-control" id="size" name="select763"
+            size="1" onchange="goToPage763(this)">
+            <option value="">Santrali seciniz</option>
+            <option value="GaziantepBadeIplik">GaziantepBadeIplik</option>
+            <option value="SalihliUysalGES">SalihliUysalGES</option>
+            <option value="GaziantepHali">GaziantepHali</option>
+        </select>
+
+        <select class="form-control" id="size" name="select763" size="1" onchange="setInverter(this)">
+            <option value="#INV1">Inverter seciniz</option>
+            <option value="#INV1">INV1</option>
+            <option value="#INV2">INV2</option>
+            <option value="#INV3">INV3</option>
+            <option value="#INV4">INV4</option>
+            <option value="#INV5">INV5</option>
+            <option value="#INV6">INV6</option>
+            <option value="#INV7">INV7</option>
+            <option value="#INV8">INV8</option>
+            <option value="#INV9">INV9</option>
+            <option value="#INV10">INV10</option>
+            <option value="#INV11">INV11</option>
+            <option value="#INV12">INV12</option>
+        </select>
+
+	<p id="demo"></p>
+    </form>
+
+ <div class="thumbnail"> 
+    <iframe name="iframe2" src="http://www.microsoft.com"  height="400px" width="90%"></iframe>
+</div> 
+
+<div class="thumbnail"> 
+    <iframe name="iframe3" src="http://www.microsoft.com"  height="400px" width="90%"></iframe>
+</div> 
+
+</body>
+
+</html>

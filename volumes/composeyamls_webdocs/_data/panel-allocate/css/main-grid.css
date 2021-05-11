@@ -1,0 +1,76 @@
+:root {
+  --padding-a: 10px;
+  --padding-b: 5px;
+  --padding-c: 10px;
+  --padding-d: 5px;
+  --grid-col-gap: 0px;
+  --grid-row-gap: 0px;
+  --grid-row-num: 4;
+  --grid-col-num: 6;
+  --string-col-num: 12;
+  --string-row-num:2;
+  --panel-v-rem: 0.2fr;
+  --panel-h-rem: 0fr;
+  --col-gap-ratio: 0.4fr;
+  --row-gap-ratio: 0.5fr;
+}
+.grid-container {
+  display: grid;
+  grid-column-gap: var(--grid-col-gap);
+  grid-row-gap: var(--grid-row-gap);
+  grid-template-columns: repeat(var(--grid-col-num), 1fr var(--col-gap-ratio)) var(--panel-v-rem);
+  grid-template-rows: repeat(var(--grid-row-num), 1fr var(--row-gap-ratio)) var(--panel-h-rem);
+  background-color: #2196F3;
+  padding: var(--padding-a) var(--padding-b) var(--padding-c) var(--padding-d);
+  border: 5px solid rgba(0, 0, 0, 0.8);
+}
+
+.grid-item {
+  display: grid;
+  grid-template-columns: repeat(var(--string-col-num), auto);
+  grid-template-rows: repeat(var(--string-row-num), auto);
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 2px;
+  text-align: center;
+}
+
+.item {
+  background-color: rgba(205, 205, 205, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1px;
+  text-align: center;
+}
+
+.grid-col-item {
+  background-color: rgba(55, 55, 55, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1px;
+  text-align: center;	
+}
+
+.grid-row-item {
+  background-color: rgba(155, 155, 155, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1px;
+  text-align: center;	
+}
+
+.panel-col-rem {
+  background-color: rgba(5, 5, 55, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1px;
+  text-align: center;	
+}
+
+.panel-row-rem {
+  background-color: rgba(15, 255, 155, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 1px;
+  text-align: center;	
+}
+
+
+.mycolumn {
+	width: 50%;
+}

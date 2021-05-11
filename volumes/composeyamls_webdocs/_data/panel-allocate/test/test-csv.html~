@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head><title>CSV</title></head>
+<body>
+
+<div id="myTable"></div>
+
+<script type="text/javascript" >
+
+var request = new XMLHttpRequest();  
+request.open("GET", "test.csv", false);   
+request.send(null);  
+
+var csvData = new Array();
+var lines = request.responseText.split("\n");
+
+var table = '<table>';
+for (var count = 0; count < lines.length; count++) {
+	if (count ==0) {
+		table += '<thead>';
+      table += '<tr>';
+	} else {
+		table += '<tr>';
+	}
+	var rowContent = lines[count].split(",");
+	for (var i = 0; i < rowContent.length; i++) {
+		if (count === 0) {
+        table += '<th>';
+        table += rowContent[i];
+        table += '</th>';
+      } else {
+        table += '<td>';
+        table += rowContent[i];
+        table += '</td>';
+      } 
+
+	}
+	if (count === 0) {
+      table += '</tr>';
+      table += '</thead>';
+      table += '<tbody>';
+   } else {
+      table += '</tr>';
+   }
+   
+}
+
+table += '</tbody>';
+table += '</table>';
+
+console.log(table);
+document.getElementById("myTable").innerHTML = table;
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

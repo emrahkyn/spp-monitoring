@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Emrah" >
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Genel Durum</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"
+        data-semver="2.0.3" data-require="jquery"></script>
+    <script>
+          function setGesName(mySelect){
+		var base_url = "http://izleme.medlabyazilim.com:3000/d-solo/";
+		var dashboard_id = "RknG-V_Mz/";
+		var dashboard_name = "enerji-uretimi?orgId=1&";
+		var from = "from=now/d&";
+		var to = "to=now&";
+		var theme = "theme=light&";
+		var panel_id = "panelId=2&"
+		var ges_name = "var-ges_name="
+		var figure_url = "";
+		
+		panel_id = "panelId=2&"
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['enerji_uretimi'].location.href = figure_url;
+
+		panel_id = "panelId=4&"
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['guc'].location.href = figure_url;
+
+		panel_id = "panelId=6&"
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['sicaklik'].location.href = figure_url;
+              
+		dashboard_id = "5vgmXgXGk/";
+		dashboard_name = "genel-bilgi?orgId=1&"
+
+		panel_id = "panelId=2&";
+		from = "from=now/d&";
+		to = "to=now&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['today_generation'].location.href = figure_url;
+
+		panel_id = "panelId=2&";
+		from = "from=now-1d/d&";
+		to = "to=now-1d/d&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['yesterday_generation'].location.href = figure_url;
+
+		panel_id = "panelId=2&";
+		from = "from=now/M&";
+		to = "to=now/M&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['thismonth_generation'].location.href = figure_url;
+
+		panel_id = "panelId=2&";
+		from = "from=now-1M/M&";
+		to = "to=now-1M/M&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['lastmonth_generation'].location.href = figure_url;
+
+		panel_id = "panelId=4&";
+		from = "from=now/d&";
+		to = "to=now&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['today_profit'].location.href = figure_url;
+
+		panel_id = "panelId=4&";
+		from = "from=now/M&";
+		to = "to=now/M&";
+		figure_url = base_url + dashboard_id + dashboard_name + from + to + theme + panel_id + ges_name + $(mySelect).val();
+		frames['thismonth_profit'].location.href = figure_url;
+
+		//document.getElementById("demo").innerHTML = figure_url;
+          }
+
+    </script> 
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+    $(function(){
+      $("#headerMobileBar").load("header_mobile_bar.html"); 
+      $("#navbarMobile").load("navbar-mobile.html"); 
+      $("#slidebar").load("slidebar.html"); 
+    });
+    </script> 
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+		<div id="headerMobileBar"></div>
+            <nav class="navbar-mobile">
+		<div id="navbarMobile"></div>
+            </nav>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+                <a href="www.medlabenerji.com">
+                    <img src="images/icon/logo2.png" alt="Cool Admin" height="80" width="80" /> MedLab Enerji
+                </a>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1">
+		<div id="slidebar"></div>
+            </div>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+			<div class="row">
+                            <div class="col-md-9">
+                                <div class="overview-wrap">
+                                    <h2 class="title-2">Izleme, Operasyon ve Yonetim Merkezi</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+				
+                        	<div class="header-wrap">
+                            	<form class="form-header" action="" method="POST">
+			        	<select class="form-control" id="size" name="select763"
+			            	size="1" onchange="setGesName(this)">
+			            	<option value="">Santral seciniz</option>
+			            	<option value="GaziantepBadeIplik">GaziantepBadeIplik</option>
+			            	<option value="SalihliUysalGES">SalihliUysalGES</option>
+			            	<option value="GaziantepHali">GaziantepHali</option>
+			        	</select>
+			        	<p id="demo"></p>
+                            	</form>
+                        	</div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Bugun Uretim</b></p>
+				<iframe name="today_generation" width="100%" height="100" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Dun Uretim</b></p>
+				<iframe name="yesterday_generation" width="100%" height="100" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Bu Ay Uretim</b></p>
+				<iframe name="thismonth_generation" width="100%" height="100" frameborder="0"></iframe>				
+                            </div>
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Gecen Ay Uretim</b></p>
+				<iframe name="lastmonth_generation" width="100%" height="100" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Bugun Kazanc</b></p>
+				    <iframe name="today_profit" width="100%" height="100" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-sm-6 col-lg-2">
+				<p style="text-align:center"><b>Bu Ay Kazanc</b></p>
+				    <iframe name="thismonth_profit" width="100%" height="100" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+				<iframe name="enerji_uretimi" width="100%" height="400" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+				    <iframe name="guc" width="100%" height="400" frameborder="0"></iframe>
+                            </div>
+                            <div class="col-lg-6">
+					<iframe name="sicaklik" width="100%" height="400" frameborder="0"></iframe>
+                            </div>
+                        </div>
+                                                
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->
